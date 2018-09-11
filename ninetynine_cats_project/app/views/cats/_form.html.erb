@@ -1,0 +1,59 @@
+<% if type == :edit %>
+  <% action_url = cat_url(cat) %>
+  <% button_label = 'Update Cat' %>
+<% else %>
+  <% action_url = cats_url %>
+  <% button_label = 'Create Cat' %>
+<% end %>
+
+
+<form action="<%= action_url %>" method="post">
+  <% if type == :edit %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+  
+  <label>Name:
+    <input type="text" name="cat[name]" value="<%= cat.name %>">
+  </label>
+  <br>
+  
+  <label>Sex:
+    <label>M
+      <input type="radio" name="cat[sex]" value="M" <%= cat.sex == "M" ? "checked" : "" %>>
+    </label>
+    <label>F
+      <input type="radio" name="cat[sex]" value="F" <%= cat.sex == "F" ? "checked" : "" %>>
+    </label>
+  </label>
+  <br>
+  
+  <label>Date of Birth:
+    <input type="date" name="cat[birth_date]" value="<%= cat.birth_date %>">
+  </label>
+  <br>
+  <label>Color:
+    <select name="cat[color]">
+      <option disabled <%= type == :new ? 'selected' : ''%>>--Please Select--</option>
+      <option value="<%= Cat::ALL_COLORS[0] %>" <%= cat.color == Cat::ALL_COLORS[0] ? "selected" : "" %>>
+        <%= Cat::ALL_COLORS[0] %></option>
+      <option value="<%= Cat::ALL_COLORS[1] %>" <%= cat.color == Cat::ALL_COLORS[1] ? "selected" : "" %>>
+        <%= Cat::ALL_COLORS[1] %></option>
+      <option value="<%= Cat::ALL_COLORS[2] %>" <%= cat.color == Cat::ALL_COLORS[2] ? "selected" : "" %>>
+        <%= Cat::ALL_COLORS[2] %></option>
+      <option value="<%= Cat::ALL_COLORS[3] %>" <%= cat.color == Cat::ALL_COLORS[3] ? "selected" : "" %>>
+        <%= Cat::ALL_COLORS[3] %></option>
+      <option value="<%= Cat::ALL_COLORS[4] %>" <%= cat.color == Cat::ALL_COLORS[4] ? "selected" : "" %>>
+        <%= Cat::ALL_COLORS[4] %></option>
+    </select>
+  </label>
+  <br>
+  
+  <label>Description:
+    <br>
+    <textarea name="cat[description]" rows="8" cols="40">
+      <%= cat.description %>
+    </textarea>
+  </label>
+  <br>
+  <input type="submit" value="<%= button_label  %>">
+</form>

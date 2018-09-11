@@ -1,0 +1,23 @@
+<h1> Cats Index </h1>
+
+<% @cats.each do |cat| %>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Cat Info</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr>
+          <td><%= cat.name %></td>
+          <td><%= cat.color %></td>
+          <td><%= cat.age %></td>
+          <td><%= cat.description %></td>
+          <td><a href="<%= cat_url(cat) %>">Show Cat</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+<% end %>
